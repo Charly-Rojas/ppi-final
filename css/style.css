@@ -1,0 +1,20 @@
+/* Estilos personalizados sobre la plantilla */
+
+/* Mostrar dropdown al hacer hover */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Asegúrate que no aparezca mal posicionado */
+.dropdown-menu {
+    margin-top: 0;
+    top: 100%;
+}
+
+/* Cambiar color del navbar active */
+a.nav-link.active,
+a.dropdown-item.active,
+a.nav-link:hover,
+a.dropdown-item:hover {
+    color: #875B35 !important;
+}
