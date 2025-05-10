@@ -1,3 +1,10 @@
+<?php
+// Llamar a conexion.php para establecer la conexión a la base de datos
+require_once ROOT_DIR.'/conexion.php';
+
+
+?>
+
 <header id="header" class="site-header text-black">
     <div class="header-top border-bottom py-2">
         <div class="container-lg">
@@ -66,11 +73,25 @@
             <div class="user-items ps-0 ps-md-5">
                 <ul class="d-flex justify-content-end list-unstyled align-item-center m-0">
                     <li class="pe-3">
-                        <a href="login" data-bs-toggle="modal" data-bs-target="#modallogin" class="border-0">
-                            <svg class="user" width="24" height="24">
-                                <use xlink:href="#user"></use>
-                            </svg>
-                        </a>
+                        <?php
+                        if (isset($_SESSION['user_id'])) {
+                            echo '<a href="profile" class="border-0">'.
+                                    $_SESSION['user_name']
+                                  .'</a>';
+                            // logout
+                            echo " | ";
+                            echo '<a href="'.ROOT_URL.'/auth/index.php?logout=true" class="border-0">
+                                    Cerrar sesión
+                                  </a>';
+                            
+                        } else {
+                            echo '<a href="login" data-bs-toggle="modal" data-bs-target="#modallogin" class="border-0">
+                                    <svg class="user" width="24" height="24">
+                                        <use xlink:href="#user"></use>
+                                    </svg>
+                                  </a>';
+                        }
+                        ?>
                     </li>
                     <li class="pe-3">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#modallong" class="border-0">

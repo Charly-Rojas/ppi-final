@@ -74,7 +74,7 @@
 </svg>
 <!-- Loader 4 -->
 
-<div class="preloader" style="position: fixed;top:0;left:0;width: 100%;height: 100%;background-color: #fff;display: flex;align-items: center;justify-content: center;z-index: 9999;">
+<!-- <div class="preloader" style="position: fixed;top:0;left:0;width: 100%;height: 100%;background-color: #fff;display: flex;align-items: center;justify-content: center;z-index: 9999;">
     <svg version="1.1" id="L4" width="100" height="100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         viewBox="0 0 50 100" enable-background="new 0 0 0 0" xml:space="preserve">
         <circle fill="#111" stroke="none" cx="6" cy="50" r="6">
@@ -102,7 +102,7 @@
                 begin="0.3" />
         </circle>
     </svg>
-</div>
+</div> -->
 
 <div class="search-box bg-dark position-relative">
     <div class="search-wrap">
@@ -319,36 +319,42 @@
     <div class="modal-dialog modal-fullscreen-md-down modal-md modal-dialog-centered" role="document">
         <div class="modal-content p-4">
             <div class="modal-header mx-auto border-0">
-                <h2 class="modal-title fs-3 fw-normal">Login</h2>
+                <h2 class="modal-title fs-3 fw-normal" id="modal-title">Inicia sesión</h2>
             </div>
             <div class="modal-body">
                 <div class="login-detail">
-                    <div class="login-form p-0">
-                        <div class="col-lg-12 mx-auto">
-                            <form id="login-form">
-                                <input type="text" name="username" placeholder="Username or Email Address *"
-                                    class="mb-3 ps-3 text-input">
-                                <input type="password" name="password" placeholder="Password" class="ps-3 text-input">
-                                <div class="checkbox d-flex justify-content-between mt-4">
-                                    <p class="checkbox-form">
-                                        <label class="">
-                                            <input name="rememberme" type="checkbox" id="remember-me" value="forever"> Remember me </label>
-                                    </p>
-                                    <p class="lost-password">
-                                        <a href="#">Forgot your password?</a>
-                                    </p>
-                                </div>
-                            </form>
-                        </div>
+                    <!-- Formulario de inicio de sesión -->
+                    <div id="login-form-wrapper">
+                        <form id="login-form" action="<?php echo ROOT_URL ?>/auth/index.php" method="post">
+                            <input type="text" name="username" placeholder="Correo*" class="mb-3 ps-3 text-input">
+                            <input type="password" name="password" placeholder="Contraseña" class="ps-3 text-input">
+                            <div class="checkbox d-flex justify-content-between mt-4">
+                                <label>
+                                    <input name="rememberme" type="checkbox" id="remember-me" value="forever"> Recuérdame
+                                </label>
+                            </div>
+                            <button id="submit-login" type="submit" class="mb-3 ps-3 btn btn-red hvr-sweep-to-right dark-sweep">Iniciar sesión</button>
+                        </form>
                     </div>
-                    <div class="modal-footer mt-5 d-flex justify-content-center">
-                        <button type="button" class="btn btn-red hvr-sweep-to-right dark-sweep">Login</button>
-                        <button type="button"
-                            class="btn btn-outline-gray hvr-sweep-to-right dark-sweep">Register</button>
+
+                    <!-- Formulario de registro -->
+                    <div id="register-form-wrapper" class="d-none">
+                        <form id="register-form" action="<?php echo ROOT_URL ?>/auth/index.php" method="post">
+                            <input type="text" name="name" placeholder="Nombre completo*" class="mb-3 ps-3 text-input">
+                            <input type="email" name="email" placeholder="Correo*" class="mb-3 ps-3 text-input">
+                            <input type="password" name="password" placeholder="Contraseña" class="mb-3 ps-3 text-input">
+                            <input type="password" name="confirm_password" placeholder="Confirmar contraseña" class="mb-3 ps-3 ps-3 text-input">
+                            <button id="submit-register" type="submit" class="btn btn-red hvr-sweep-to-right dark-sweep d-none">Registrarse</button>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer mt-2 mb-3 d-flex justify-content-center gap-3">
+                        <button id="toggle-form" type="button" class="btn btn-outline-gray hvr-sweep-to-right dark-sweep">Crear cuenta</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Login -->

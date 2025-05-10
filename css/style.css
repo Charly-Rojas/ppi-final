@@ -1,5 +1,16 @@
 /* Estilos personalizados sobre la plantilla */
 
+/* Fondo */
+body {
+    background-color: #F5F5F5;
+}
+
+.product-image:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
 /* Mostrar dropdown al hacer hover */
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
