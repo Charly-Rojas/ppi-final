@@ -8,6 +8,7 @@
         <path fill="currentColor"
             d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396l1.414-1.414l-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8s3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6s-6-2.691-6-6s2.691-6 6-6z" />
     </symbol>
+    
     <symbol xmlns="http://www.w3.org/2000/svg" id="shopping-cart" viewBox="0 0 24 24" fill="none">
         <path
             d="M21 4H2V6H4.3L7.582 15.025C7.79362 15.6029 8.1773 16.1021 8.68134 16.4552C9.18539 16.8083 9.78556 16.9985 10.401 17H19V15H10.401C9.982 15 9.604 14.735 9.461 14.342L8.973 13H18.246C19.136 13 19.926 12.402 20.169 11.549L21.962 5.275C22.0039 5.12615 22.0109 4.96962 21.9823 4.81763C21.9537 4.66565 21.8904 4.52234 21.7973 4.39889C21.7041 4.27544 21.5837 4.1752 21.4454 4.106C21.3071 4.0368 21.1546 4.00053 21 4ZM18.246 11H8.246L6.428 6H19.675L18.246 11Z"
@@ -120,7 +121,7 @@
     </div>
 </div>
 
-<!-- quick view -->
+<!-- quick view
 <div class="modal fade" id="modaltoggle" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog modal-fullscreen-md-down modal-md modal-dialog-centered">
         <div class="modal-content">
@@ -182,7 +183,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- variations-form -->
+                            <-- variations-form ->
                             <div class="categories d-flex flex-wrap pt-3">
                                 <strong class="pe-2">Categories:</strong>
                                 <a href="#" title="categories">Clothing,</a>
@@ -195,7 +196,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 

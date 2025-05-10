@@ -4,6 +4,9 @@ require_once '../config.php';
 require_once ROOT_DIR . '/conexion.php';
 
 
+print_r($_POST);
+print_r($_GET);
+
 // Si es logout
 if (isset($_GET['logout'])) {
     session_destroy();
@@ -15,20 +18,22 @@ if (isset($_GET['logout'])) {
 if (isset($_POST['username']) && isset($_POST['password']) && !isset($_POST['email'])) {
     $correo = $_POST['username'];
     $pass = $_POST['password'];
+    echo "aqui";
 
-    $sql = "SELECT id, name, password FROM users WHERE mail = '$correo'";
+    $sql = "SELECT id, name, password_hash FROM users WHERE email = '$correo'";
+    echo $sql;
     $res = $conn->query($sql);
 
     if ($res && $res->num_rows === 1) {
         $user = $res->fetch_assoc();
 
-        if (password_verify($pass, $user['password'])) {
+        if (password_verify($pass, $user['password_hash'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
             header("Location: ".ROOT_URL."?success=Bienvenido " . $user['name']);
             exit();
         } else {
-            header("Location: " . ROOT_URL ."?error=Credenciales incorrectas");
+            header("Location: " . ROOT_URL ."?error=Credenciales incorrectas&sql=$sql");
             exit();
         }
     } else {
@@ -50,14 +55,14 @@ elseif (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['nam
     }
 
     // Validar si ya existe
-    $check = $conn->query("SELECT id FROM users WHERE mail = '$email'");
+    $check = $conn->query("SELECT id FROM users WHERE email = '$email'");
     if ($check && $check->num_rows > 0) {
         header("Location: " . ROOT_URL ."?error=El correo ya está registrado");
         exit();
     }
 
     $hashed = password_hash($pass, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO users (name, mail, password) VALUES ('$name', '$email', '$hashed')";
+    $sql = "INSERT INTO users (name, mail, password_hash) VALUES ('$name', '$email', '$hashed')";
 
     if ($conn->query($sql)) {
         $_SESSION['user_id'] = $conn->insert_id;

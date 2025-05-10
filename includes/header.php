@@ -73,6 +73,7 @@ require_once ROOT_DIR . '/conexion.php';
             <div class="user-items ps-0 ps-md-5">
                 <ul class="d-flex justify-content-end list-unstyled align-item-center m-0">
                     <li class="pe-3">
+
                         <?php
                         if (isset($_SESSION['user_id'])) {
                             echo '<a href="profile" class="border-0">' .
@@ -144,75 +145,91 @@ if (isset($_COOKIE['carrito'])) {
                     <div class="shopping-cart-content">
 
 
+                        <?php
+                        // Obtener los productos del carrito (ids) desde la base de datos
+                        $sql = "SELECT id, name, price, url_img as image_url FROM products WHERE id IN (" . implode(',', array_keys($carrito)) . ")";
+                        if ($conn->query($sql) === false) {
+                            echo "Error: " . $conn->error;
+                        } else {
+                            $result = $conn->query($sql);
+                        }
+                        // Agregar la cantidad desde carrito id=>cantidad a la variable result
+                        $result = array_map(function ($producto) use ($carrito) {
+                            $producto['cantidad'] = $carrito[$producto['id']];
+                            return $producto;
+                        }, $result->fetch_all(MYSQLI_ASSOC));
+                        // Mostrar los productos del carrito
 
-                    <?php
-                        foreach ($carrito as $id) {
-                    ?>
-                        <div class="mini-cart cart-list p-0 mt-3">
-                            <div class="mini-cart-item d-flex border-bottom pb-3">
-                                <div class="col-lg-2 col-md-3 col-sm-2 me-4">
-                                    <a href="#" title="product-image">
-                                        <img src="images/single-product-thumb1.jpg" class="img-fluid" alt="single-product-item">
-                                    </a>
-                                </div>
-                                <div class="col-lg-9 col-md-8 col-sm-8">
-                                    <div class="product-header d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="product-title fs-6 me-5">Sport Shoes For Men</h4>
-                                        <a href="" class="remove" aria-label="Remove this item" data-product_id="11913"
-                                            data-cart_item_key="abc" data-product_sku="">
-                                            <svg class="close">
-                                                <use xlink:href="#close"></use>
-                                            </svg>
-                                        </a>
+
+                        //Inicializar la variable de total
+                        $total = 0;
+
+                        foreach ($result as $producto) {
+                            $id = $producto['id'];
+                            $nombre = $producto['name'];
+                            $precio = $producto['price'];
+                            $imagen = $producto['image_url'];
+                            $cantidad = $producto['cantidad'];
+                            $subtotal = $precio * $cantidad;
+                            $total += $subtotal;
+                        ?>
+                            <div class="mini-cart cart-list p-0 mt-3" data-product-id="<?php echo $id; ?>" data-price="<?php echo $precio; ?>">
+                                <div class="mini-cart-item d-flex border-bottom pb-3">
+                                    <div class="col-lg-2 col-md-3 col-sm-2 me-4">
+                                        <img src="<?php echo ROOT_URL ?>/images/<?php echo $imagen ?>" class="img-fluid" alt="Imagen de producto">
                                     </div>
-                                    <div class="quantity-price d-flex justify-content-between align-items-center">
-                                        <div class="input-group product-qty">
-                                            <button type="button"
-                                                class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
-                                                data-type="minus">
-                                                <svg width="16" height="16">
-                                                    <use xlink:href="#minus"></use>
-                                                </svg>
+                                    <div class="col-lg-9 col-md-8 col-sm-8">
+                                        <div class="product-header d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="product-title fs-6 me-5"><?php echo $nombre ?></h4>
+                                            <button class="btn btn-sm btn bg-gray rounded remove-from-cart" data-product-id="<?php echo $id; ?>">
+                                                <i class="fa-solid fa-trash"></i>
                                             </button>
-                                            <input type="text" name="quantity" class="form-control input-number quantity" value="1">
-                                            <button type="button" class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
-                                                data-type="plus">
-                                                <svg width="16" height="16">
-                                                    <use xlink:href="#plus"></use>
-                                                </svg>
+                                        </div>
+                                        <div class="input-group product-qty">
+                                            <button type="button" class="quantity-left-minus btn btn-light rounded-start" data-action="minus">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </button>
+                                            <input type="text" class="form-control quantity-input text-center" value="<?php echo $cantidad ?>" readonly>
+                                            <button type="button" class="quantity-right-plus btn btn-light rounded-end" data-action="plus">
+                                                <i class="fa-solid fa-plus"></i>
                                             </button>
                                         </div>
                                         <div class="price-code">
-                                            <span class="product-price fs-6">$99</span>
+                                            <span class="product-price fs-6">$<span class="subtotal"><?php echo number_format($subtotal, 2); ?></span></span>
                                         </div>
                                     </div>
-                                    <!-- quantity-price -->
                                 </div>
                             </div>
-                        </div>
-
-                        <?php
-                        }
-                        ?>
-
-                        <!-- cart-list -->
-                        <div class="mini-cart-total d-flex justify-content-between py-4">
-                            <span class="fs-6">Subtotal:</span>
-                            <span class="special-price-code">
-                                <span class="price-amount amount fs-6" style="opacity: 1;">
-                                    <bdi>
-                                        <span class="price-currency-symbol">$</span>198.00 </bdi>
-                                </span>
-                            </span>
-                        </div>
-                        <div class="modal-footer my-4 justify-content-center">
-                            <button type="button" class="btn btn-red hvr-sweep-to-right dark-sweep">View Cart</button>
-                            <button type="button"
-                                class="btn btn-outline-gray hvr-sweep-to-right dark-sweep">Checkout</button>
-                        </div>
                     </div>
+                <?php } ?>
+                <div class="mini-cart-total d-flex justify-content-between py-4">
+                    <span class="fs-6">Subtotal:</span>
+                    <span class="special-price-code fs-6">
+                        $<span id="total-cart"><?php echo number_format($total, 2) ?></span>
+                    </span>
+                </div>
+
+
+                <div class="modal-footer my-4 justify-content-center">
+                    <button type="button" class="btn btn-outline-gray hvr-sweep-to-right dark-sweep">Checkout</button>
+                </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<!-- Toast Bootstrap para mensajes -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+    <div id="liveToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body" id="toastMessage">
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                data-bs-dismiss="toast" aria-label="Cerrar"></button>
         </div>
     </div>
 </div>

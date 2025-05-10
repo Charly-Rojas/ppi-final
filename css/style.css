@@ -29,3 +29,9 @@ a.nav-link:hover,
 a.dropdown-item:hover {
     color: #875B35 !important;
 }
+
+/* Hover en las cards de product*/
+.product-cdivrd:hover .card-img {
+    opacity: 0.8;
+    ;
+}
