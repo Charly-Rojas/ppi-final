@@ -9,13 +9,11 @@
                 <?php
                 $sql = "
                         SELECT 
-                            p.id,
-                            p.name,
-                            pv.price,
-                            pi.url AS image_url
+                            id,
+                            name,
+                            price,
+                            url_img as image_url
                         FROM products p
-                        JOIN product_variants pv ON pv.product_id = p.id
-                        JOIN product_images pi ON pi.product_id = p.id AND pi.is_main = 1
                         ORDER BY RAND()
                         LIMIT 5
                     ";
@@ -63,14 +61,12 @@
                 <?php
                 $sql = "
                         SELECT 
-                            p.id,
-                            p.name,
-                            pv.price,
-                            pi.url AS image_url
+                            id,
+                            name,
+                            price,
+                            url_img as image_url
                         FROM products p
-                        JOIN product_variants pv ON pv.product_id = p.id
-                        JOIN product_images pi ON pi.product_id = p.id AND pi.is_main = 1
-                        ORDER BY timestamp DESC
+                        ORDER BY created_at DESC
                         LIMIT 5
                     ";
 

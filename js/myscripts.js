@@ -1,45 +1,20 @@
-// Funcionalidad del modal de login y registro
+// Agregar al carrito con cookies
 
-document.addEventListener("DOMContentLoaded", function () {
-    const toggleBtn = document.getElementById("toggle-form");
-    const loginForm = document.getElementById("login-form-wrapper");
-    const registerForm = document.getElementById("register-form-wrapper");
-    const modalTitle = document.getElementById("modal-title");
-    const submitLogin = document.getElementById("submit-login");
-    const submitRegister = document.getElementById("submit-register");
+// Función para obtener el contenido de la cookie como objeto JS
+function getCartFromCookie() {
+    const match = document.cookie.match(/(?:^|; )carrito=([^;]*)/);
+    return match ? JSON.parse(decodeURIComponent(match[1])) : {};
+}
 
-    let showingLogin = true;
+// Función para guardar el carrito en la cookie
+function saveCartToCookie(cart) {
+    document.cookie = "carrito=" + encodeURIComponent(JSON.stringify(cart)) + "; path=/";
+}
 
-    toggleBtn.addEventListener("click", function () {
-        showingLogin = !showingLogin;
-
-    if (showingLogin) {
-        loginForm.classList.remove("d-none");
-    registerForm.classList.add("d-none");
-    modalTitle.textContent = "Inicia sesión";
-    submitLogin.classList.remove("d-none");
-    submitRegister.classList.add("d-none");
-    toggleBtn.textContent = "Crear cuenta";
-        } else {
-        loginForm.classList.add("d-none");
-    registerForm.classList.remove("d-none");
-    modalTitle.textContent = "Crear cuenta";
-    submitLogin.classList.add("d-none");
-    submitRegister.classList.remove("d-none");
-    toggleBtn.textContent = "Volver a login";
-        }
-    });
-
-    // Opcional: acciones en los botones
-    submitLogin.addEventListener("click", function () {
-        const formData = new FormData(document.getElementById("login-form"));
-    console.log("Enviando login", Object.fromEntries(formData));
-        // Aquí puedes hacer un fetch/AJAX al backend
-    });
-
-    submitRegister.addEventListener("click", function () {
-        const formData = new FormData(document.getElementById("register-form"));
-    console.log("Enviando registro", Object.fromEntries(formData));
-        // Aquí también puedes hacer un fetch/AJAX
-    });
-});
+// Función para agregar al carrito con cantidad
+function addToCart(productId) {
+    let cart = getCartFromCookie();
+    cart[productId] = (cart[productId] || 0) + 1;
+    saveCartToCookie(cart);
+    alert("Producto agregado al carrito");
+}
