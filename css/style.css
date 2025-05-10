@@ -35,3 +35,12 @@ a.dropdown-item:hover {
     opacity: 0.8;
     ;
 }
+
+.logo {
+    width: auto;
+    height: 4em;
+
+    @media (min-width: 768px) {
+        height: 7em;
+    }
+}

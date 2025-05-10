@@ -15,15 +15,13 @@ if ($res && $res->num_rows === 1) {
 }
 
 ?>
+<h1 class="text-center mt-5 mb-5 pb-5 text-uppercase"><?php echo $category ?></h1>
 
 <section id="featured-products" class="product-store">
     <div class="container-md">
-        <div class="display-header d-flex align-items-center justify-content-between">
-            <h2 class="section-title text-uppercase"><?php echo $category ?></h2>
-        </div>
         <div class="product-content padding-small">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
-            <?php
+                <?php
                 $sql = "
                         SELECT 
                             id,
@@ -42,7 +40,7 @@ if ($res && $res->num_rows === 1) {
                     );
 
                 endforeach;
-            ?>
+                ?>
             </div>
 
         </div>

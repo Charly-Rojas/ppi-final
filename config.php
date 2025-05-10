@@ -38,16 +38,24 @@ if (!file_exists(ROOT_DIR . '/images/' . $image_url)) {
             <div class="card-img border-rounded-10" id="' . htmlspecialchars($id) . '" style="transition: background-color 0.3s;">
                 <img src="' . ROOT_URL . '/images/' . htmlspecialchars($image_url) . '" alt="product-item" class="product-image img-fluid border-rounded-10">
                 <div class="cart-concern position-absolute d-flex justify-content-center">
-                    <div class="cart-button d-flex gap-2 justify-content-center align-items-center">
+                    <div class="cart-button d-flex gap-2 justify-content-center align-items-center">';
 
-                        <button type="button" onclick="addToCart(\'' . htmlspecialchars($id) . '\')" class="btn btn-light">
+                    if (isset($_SESSION['user_id'])) {
+                        echo '<button type="button" onclick="addToCart(\'' . htmlspecialchars($id) . '\')" class="btn btn-light">
                             <i class="fa-solid fa-cart-plus"></i>
-                        </button>
-
+                        </button>';
+                    } else {
+                        echo '<a href="login" data-bs-toggle="modal" data-bs-target="#modallogin" class="">
+                                <button type="button" class="btn btn-light">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </a>';
+                    }
+                    echo '
                         <a href="' . ROOT_URL . '/producto?id=' . htmlspecialchars($id) . '">
-                        <button type="button" class="btn btn-light" data-bs-toggle="modal">
-                            <i class="fa-solid fa-right-long"></i>
-                        </button>
+                            <button type="button" class="btn btn-light" data-bs-toggle="modal">
+                                <i class="fa-solid fa-right-long"></i>
+                            </button>
                         </a>
 
                     </div>

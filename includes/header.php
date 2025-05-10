@@ -4,7 +4,7 @@ require_once ROOT_DIR . '/conexion.php';
 
 
 ?>
-
+<!-- Global header -->
 <header id="header" class="site-header text-black">
     <div class="header-top border-bottom py-2">
         <div class="container-lg">
@@ -19,7 +19,7 @@ require_once ROOT_DIR . '/conexion.php';
     <nav id="header-nav" class="navbar navbar-expand-lg">
         <div class="container-lg">
             <a class="navbar-brand" href="index.html">
-                <img src="<?php echo ROOT_URL; ?>/images/logoAureaUrbana.png" class="logo img-fluid" alt="logo" style="width: auto; height: 6em;">
+                <img src="<?php echo ROOT_URL; ?>/images/logoAureaUrbana.png" class="logo img-fluid" alt="logo">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 border-0 p-1 ms-2" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,10 +38,10 @@ require_once ROOT_DIR . '/conexion.php';
                 <div class="offcanvas-body">
                     <ul id="navbar" class="navbar-nav justify-content-end align-items-center flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link me-5 <?php echo ($_SERVER['REQUEST_URI'] == ROOT_URL . '/' ? 'active' : ''); ?>" href="<?php echo ROOT_URL; ?>/">Inicio</a>
+                            <a style="font-size: 1em" class="nav-link me-5 <?php echo ($_SERVER['REQUEST_URI'] == ROOT_URL . '/' ? 'active' : ''); ?>" href="<?php echo ROOT_URL; ?>/">Inicio</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link me-5 dropdown-toggle border-0 <?php echo ($_SERVER['REQUEST_URI'] == ROOT_URL . '/' . 'tienda/' ? 'active' : ''); ?>" href="<?php echo ROOT_URL; ?>/tienda" data-bs-toggle="dropdown"
+                            <a style="font-size: 1em" class="nav-link me-5 dropdown-toggle border-0 <?php echo ($_SERVER['REQUEST_URI'] == ROOT_URL . '/' . 'tienda/' ? 'active' : ''); ?>" href="<?php echo ROOT_URL; ?>/tienda" data-bs-toggle="dropdown"
                                 aria-expanded="false">Tienda</a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -65,7 +65,7 @@ require_once ROOT_DIR . '/conexion.php';
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-5 <?php echo ($_SERVER['REQUEST_URI'] == ROOT_URL . '/' . 'nosotros/' ? 'active' : ''); ?>" href="<?php echo ROOT_URL; ?>/nosotros">Nosotros</a>
+                            <a style="font-size: 1em" class="nav-link me-5 <?php echo ($_SERVER['REQUEST_URI'] == ROOT_URL . '/' . 'nosotros/' ? 'active' : ''); ?>" href="<?php echo ROOT_URL; ?>/nosotros">Nosotros</a>
                         </li>
                     </ul>
                 </div>
@@ -75,19 +75,17 @@ require_once ROOT_DIR . '/conexion.php';
                     <?php
                     if (isset($_SESSION['user_id'])) {
                     ?>
-                        <li class="pe-3 d-flex align-items-center">
+                        <li class="pe-1 d-flex align-items-center">
                             <?php echo $_SESSION['user_name'] ?>
                         </li>
-                        <li class="pe-3">
+                        <li class="pe-1">
                             <a href="<?php echo ROOT_URL ?>/auth/index.php?logout=true" class="border-0 btn btn-light rounded-circle" data-bs-toggle="tooltip" title="Cerrar sesión">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </a>
                         </li>
-                        <li class="pe-3">
+                        <li class="pe-1">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modallong" class="border-0 btn btn-light rounded-circle" data-bs-toggle="tooltip" title="Carrito">
-                                <svg class="shopping-cart" width="24" height="24">
-                                    <use xlink:href="#shopping-cart"></use>
-                                </svg>
+                                <i class="fa-solid fa-cart-shopping"></i>
                             </a>
                         </li>
                     <?php
@@ -101,9 +99,7 @@ require_once ROOT_DIR . '/conexion.php';
                     ?>
                     <li>
                         <a href="#" class="search-item border-0 btn btn-light rounded-circle" data-bs-toggle="collapse" data-bs-target="#search-box" aria-label="Toggle navigation">
-                            <svg class="search" width="24" height="24">
-                                <use xlink:href="#search"></use>
-                            </svg>
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </a>
                     </li>
                 </ul>
