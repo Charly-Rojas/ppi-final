@@ -10,7 +10,7 @@ print_r($_GET);
 // Si es logout
 if (isset($_GET['logout'])) {
     session_destroy();
-    header("Location: " . ROOT_URL . "?success=Sesión cerrada");
+    header("Location: " . ROOT_URL . "?message=Sesión cerrada");
     exit();
 }
 
@@ -30,14 +30,14 @@ if (isset($_POST['username']) && isset($_POST['password']) && !isset($_POST['ema
         if (password_verify($pass, $user['password_hash'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
-            header("Location: ".ROOT_URL."?success=Bienvenido " . $user['name']);
+            header("Location: ".ROOT_URL."?message=Bienvenido " . $user['name']);
             exit();
         } else {
-            header("Location: " . ROOT_URL ."?error=Credenciales incorrectas&sql=$sql");
+            header("Location: " . ROOT_URL ."?type=error&message=Credenciales incorrectas&sql=$sql");
             exit();
         }
     } else {
-        header("Location: " . ROOT_URL ."?error=Credenciales incorrectas");
+        header("Location: " . ROOT_URL ."?type=error&message=Credenciales incorrectas");
         exit();
     }
 }
@@ -50,14 +50,14 @@ elseif (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['nam
     $confirm = $_POST['confirm_password'];
 
     if ($pass != $confirm) {
-        header("Location: " . ROOT_URL ."?error=Las contraseñas no coinciden");
+        header("Location: " . ROOT_URL ."?type=error&message=Las contraseñas no coinciden");
         exit();
     }
 
     // Validar si ya existe
     $check = $conn->query("SELECT id FROM users WHERE email = '$email'");
     if ($check && $check->num_rows > 0) {
-        header("Location: " . ROOT_URL ."?error=El correo ya está registrado");
+        header("Location: " . ROOT_URL ."?type=error&message=El correo ya está registrado");
         exit();
     }
 
@@ -67,14 +67,14 @@ elseif (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['nam
     if ($conn->query($sql)) {
         $_SESSION['user_id'] = $conn->insert_id;
         $_SESSION['user_name'] = $name;
-        header("Location: ".ROOT_URL ."?success=Usuario registrado con éxito");
+        header("Location: ".ROOT_URL ."?message=Usuario registrado con éxito");
         exit();
     } else {
-        header("Location: " . ROOT_URL ."?error=Error al registrar el usuario");
+        header("Location: " . ROOT_URL ."?type=error&message=Error al registrar el usuario");
         exit();
     }
 } else {
-    header("Location: " . ROOT_URL ."?error=Acceso inválido");
+    header("Location: " . ROOT_URL ."?type=error&message=Acceso inválido");
     exit();
 }
 

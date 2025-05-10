@@ -8,7 +8,7 @@
         <path fill="currentColor"
             d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396l1.414-1.414l-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8s3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6s-6-2.691-6-6s2.691-6 6-6z" />
     </symbol>
-    
+
     <symbol xmlns="http://www.w3.org/2000/svg" id="shopping-cart" viewBox="0 0 24 24" fill="none">
         <path
             d="M21 4H2V6H4.3L7.582 15.025C7.79362 15.6029 8.1773 16.1021 8.68134 16.4552C9.18539 16.8083 9.78556 16.9985 10.401 17H19V15H10.401C9.982 15 9.604 14.735 9.461 14.342L8.973 13H18.246C19.136 13 19.926 12.402 20.169 11.549L21.962 5.275C22.0039 5.12615 22.0109 4.96962 21.9823 4.81763C21.9537 4.66565 21.8904 4.52234 21.7973 4.39889C21.7041 4.27544 21.5837 4.1752 21.4454 4.106C21.3071 4.0368 21.1546 4.00053 21 4ZM18.246 11H8.246L6.428 6H19.675L18.246 11Z"
@@ -197,49 +197,3 @@
         </div>
     </div>
 </div> -->
-
-
-
-<div class="modal fade" id="modallogin" tabindex="-1" aria-modal="true" role="dialog">
-    <div class="modal-dialog modal-fullscreen-md-down modal-md modal-dialog-centered" role="document">
-        <div class="modal-content p-4">
-            <div class="modal-header mx-auto border-0">
-                <h2 class="modal-title fs-3 fw-normal" id="modal-title">Inicia sesión</h2>
-            </div>
-            <div class="modal-body">
-                <div class="login-detail">
-                    <!-- Formulario de inicio de sesión -->
-                    <div id="login-form-wrapper">
-                        <form id="login-form" action="<?php echo ROOT_URL ?>/auth/index.php" method="post">
-                            <input type="text" name="username" placeholder="Correo*" class="mb-3 ps-3 text-input">
-                            <input type="password" name="password" placeholder="Contraseña" class="ps-3 text-input">
-                            <div class="checkbox d-flex justify-content-between mt-4">
-                                <label>
-                                    <input name="rememberme" type="checkbox" id="remember-me" value="forever"> Recuérdame
-                                </label>
-                            </div>
-                            <button id="submit-login" type="submit" class="mb-3 ps-3 btn btn-red hvr-sweep-to-right dark-sweep">Iniciar sesión</button>
-                        </form>
-                    </div>
-
-                    <!-- Formulario de registro -->
-                    <div id="register-form-wrapper" class="d-none">
-                        <form id="register-form" action="<?php echo ROOT_URL ?>/auth/index.php" method="post">
-                            <input type="text" name="name" placeholder="Nombre completo*" class="mb-3 ps-3 text-input">
-                            <input type="email" name="email" placeholder="Correo*" class="mb-3 ps-3 text-input">
-                            <input type="password" name="password" placeholder="Contraseña" class="mb-3 ps-3 text-input">
-                            <input type="password" name="confirm_password" placeholder="Confirmar contraseña" class="mb-3 ps-3 ps-3 text-input">
-                            <button id="submit-register" type="submit" class="btn btn-red hvr-sweep-to-right dark-sweep d-none">Registrarse</button>
-                        </form>
-                    </div>
-
-                    <div class="modal-footer mt-2 mb-3 d-flex justify-content-center gap-3">
-                        <button id="toggle-form" type="button" class="btn btn-outline-gray hvr-sweep-to-right dark-sweep">Crear cuenta</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Login -->

@@ -55,6 +55,23 @@ document.addEventListener("click", function (e) {
             }
 
             updateCartTotal();
+
+            // Verificar si quedan productos
+            if (Object.keys(cart).length === 0) {
+                const cartContainer = document.getElementById("cart-container");
+                if (cartContainer) {
+                    cartContainer.innerHTML = `
+            <div class="d-flex flex-column align-items-center justify-content-center py-5">
+                <i class="fa-solid fa-cart-arrow-down fa-3x mb-3"></i>
+                <p class="text-center">El carrito está vacío</p>
+                <a href="${ROOT_URL}/tienda" class="btn btn-outline-gray hvr-sweep-to-right dark-sweep">
+                    Comienza a agregar productos
+                </a>
+            </div>
+        `;
+                }
+            }
+
         }
     }
 
@@ -73,10 +90,7 @@ function updateCartTotal() {
     console.log("Total sin formatear:", total);
 
     // Mostrar con formato moneda MXN
-    document.getElementById("total-cart").textContent = total.toLocaleString('es-MX', {
-        style: 'currency',
-        currency: 'MXN'
-    });
+    document.getElementById("total-cart").textContent = total.toFixed(2);
 }
 
 
@@ -99,18 +113,45 @@ function addToCart(productId) {
 document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
     const message = params.get("message");
+    const type = params.get("type");
+    let typeClass = "";
 
     if (message) {
         const toastEl = document.getElementById('liveToast');
         const toastBody = document.getElementById('toastMessage');
-        toastBody.textContent = decodeURIComponent(message);
+        
 
+        switch (type) {
+            case "error":
+                typeClass = "bg-danger";
+                break;
+            case "success":
+                typeClass = "bg-success";
+                break;
+            case "warning":
+                typeClass = "bg-warning";
+                break;
+            case "info":
+                typeClass = "bg-info";
+                break;
+            default:
+                typeClass = "bg-success";
+                break;
+        }
+        if (toastEl && typeClass) {
+            toastEl.classList.add(typeClass);
+        }
+        if (toastBody) {
+            toastBody.textContent = decodeURIComponent(message);
+        }
+        
         const toast = new bootstrap.Toast(toastEl, {
             delay: 5000
         });
 
         // Borrar de la url el mensaje
         params.delete("message");
+        params.delete("type");
         window.history.replaceState({}, document.title, window.location.pathname + '?' + params.toString());
 
         toast.show();

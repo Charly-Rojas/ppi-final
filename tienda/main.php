@@ -1,4 +1,5 @@
 <!-- Aleatorios -->
+<h1 class="text-center mt-5 mb-5 pb-5 text-uppercase">Bienvenido a la tienda de Áurea Urbana</h1>
 <section id="featured-products" class="product-store">
     <div class="container-md">
         <div class="display-header d-flex align-items-center justify-content-between">
@@ -25,7 +26,7 @@
                         $producto['price'],
                         $producto['image_url']
                     );
-                
+
                 endforeach; ?>
             </div>
 
@@ -110,7 +111,7 @@ foreach ($categorias as $categoria):
                     } else {
                         $result = $conn->query($sql);
                     }
-                    
+
                     // Mostrar los productos de la categoría
                     foreach ($result as $producto):
                         print_product_card(
@@ -119,13 +120,11 @@ foreach ($categorias as $categoria):
                             $producto['price'],
                             $producto['image_url']
                         );
-                     endforeach; ?>
+                    endforeach; ?>
                     <div class="col mb-4 product-image">
-                        <a href="<?php echo ROOT_URL ?>/categoria?name=<?php echo urlencode($categoria["name"]); ?>" class="d-flex justify-content-center align-items-center border border-rounded-10" style="height: 100%; text-decoration: none;">
+                        <a href="<?php echo ROOT_URL ?>/categoria?name=<?php echo urlencode($categoria["name"]); ?>" class="d-flex justify-content-center align-items-center border border-rounded-10 p-4" style="height: 100%; text-decoration: none;">
                             <span class="fw-bold text-uppercase">Ver más</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right ms-2" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 1 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                            </svg>
+                            <i class="fa-solid fa-arrow-right-long ms-2"></i>
                         </a>
                     </div>
                 </div>
