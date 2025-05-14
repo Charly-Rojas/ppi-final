@@ -27,7 +27,7 @@ session_start();
 
 
 // Funciones
-function print_product_card($id, $name, $price, $image_url, $stock) {
+function print_product_card($id, $name, $price, $image_url, $stock = 0) {
 
 if (!file_exists(ROOT_DIR . '/images/' . $image_url)) {
     $image_url = 'product.jpg';

@@ -122,6 +122,7 @@ require_once 'config.php';
               $producto['name'],
               $producto['price'],
               $producto['image_url']
+              // $producto['stock']
             );
 
           endforeach; ?>
