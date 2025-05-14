@@ -87,11 +87,11 @@ if (isset($_COOKIE['carrito'])) {
                 <form action="<?php echo ROOT_URL; ?>/tienda/checkout/confirm.php" method="POST">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        <input type="text" class="form-control" value="Carlos" id="nombre" name="nombre" required>
                     </div>
                     <div class="mb-3">
                         <label for="direccion" class="form-label">Dirección</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion" required>
+                        <input type="text" class="form-control" value="Calle Anahuac" id="direccion" name="direccion" required>
                     </div>
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Confirmar pedido</button>

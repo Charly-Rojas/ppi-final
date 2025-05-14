@@ -27,7 +27,7 @@ session_start();
 
 
 // Funciones
-function print_product_card($id, $name, $price, $image_url) {
+function print_product_card($id, $name, $price, $image_url, $stock) {
 
 if (!file_exists(ROOT_DIR . '/images/' . $image_url)) {
     $image_url = 'product.jpg';
@@ -35,13 +35,13 @@ if (!file_exists(ROOT_DIR . '/images/' . $image_url)) {
     echo '
     <div class="col mb-4">
         <div class="product-card position-relative" style="cursor: pointer; object-fit: contain;">
-            <div class="card-img border-rounded-10" id="' . htmlspecialchars($id) . '" style="transition: background-color 0.3s;">
+            <div class="card-img border-rounded-10" id="' . htmlspecialchars($id) . '" style="transition: background-color 0.3s;" data-stock="' . htmlspecialchars($stock) . '">
                 <img src="' . ROOT_URL . '/images/' . htmlspecialchars($image_url) . '" alt="product-item" class="product-image img-fluid border-rounded-10">
                 <div class="cart-concern position-absolute d-flex justify-content-center">
                     <div class="cart-button d-flex gap-2 justify-content-center align-items-center">';
 
                     if (isset($_SESSION['user_id'])) {
-                        echo '<button type="button" onclick="addToCart(\'' . htmlspecialchars($id) . '\')" class="btn btn-light">
+                        echo '<button type="button" onclick="addToCart(\'' . htmlspecialchars($id) . '\', '. htmlspecialchars($stock).')" class="btn btn-light">
                             <i class="fa-solid fa-cart-plus"></i>
                         </button>';
                     } else {
@@ -52,7 +52,7 @@ if (!file_exists(ROOT_DIR . '/images/' . $image_url)) {
                             </a>';
                     }
                     echo '
-                        <a href="' . ROOT_URL . '/producto?id=' . htmlspecialchars($id) . '">
+                        <a href="' . ROOT_URL . '/tienda/producto/?id=' . htmlspecialchars($id) . '">
                             <button type="button" class="btn btn-light" data-bs-toggle="modal">
                                 <i class="fa-solid fa-right-long"></i>
                             </button>

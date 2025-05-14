@@ -11,6 +11,10 @@ function saveCartToCookie(cart) {
 }
 
 document.addEventListener("click", function (e) {
+    //Imprimir la cookie en la consola del carrito
+    console.log("Contenido de la cookie carrito:", getCartFromCookie());
+
+
     if (e.target.closest(".quantity-left-minus, .quantity-right-plus")) {
         const button = e.target.closest("button[data-action]");
         const action = button.getAttribute("data-action");
@@ -23,9 +27,18 @@ document.addEventListener("click", function (e) {
 
         let cart = getCartFromCookie();
         let currentQty = cart[productId] || 1;
+        let stock = document.getElementById(productId).getAttribute("data-stock");
 
         if (action === "plus") {
-            currentQty++;
+            if (currentQty < stock) {
+                currentQty++;
+            } else {
+                const msg = "Inventario insuficiente";
+                const url = new URL(window.location);
+                url.searchParams.set('message', msg);
+                url.searchParams.set('type', 'error');
+                window.location.href = url.toString();
+            }
         } else if (action === "minus" && currentQty > 1) {
             currentQty--;
         }
@@ -94,18 +107,20 @@ function updateCartTotal() {
 }
 
 
-function addToCart(productId) {
+function addToCart(productId, stock, quantity = 1) {
     let cart = getCartFromCookie();
-    cart[productId] = (cart[productId] || 0) + 1;
+    if (cart[productId]) {
+        cart[productId] = Math.min(cart[productId] + quantity, stock);
+    } else {
+        cart[productId] = Math.min(quantity, stock);
+    }
     saveCartToCookie(cart);
-
 
     // Refrescar la página y agregar al url message=Producto agregado al carrito
     const msg = "Producto agregado al carrito";
     const url = new URL(window.location);
     url.searchParams.set('message', msg);
-    window.location.href = url.toString(); 
-    
+    window.location.href = url.toString();
 }
 
 

@@ -62,7 +62,7 @@ elseif (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['nam
     }
 
     $hashed = password_hash($pass, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO users (name, mail, password_hash) VALUES ('$name', '$email', '$hashed')";
+    $sql = "INSERT INTO users (name, email, password_hash) VALUES ('$name', '$email', '$hashed')";
 
     if ($conn->query($sql)) {
         $_SESSION['user_id'] = $conn->insert_id;

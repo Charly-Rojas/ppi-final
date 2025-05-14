@@ -27,7 +27,8 @@ if ($res && $res->num_rows === 1) {
                             id,
                             name,
                             price,
-                            url_img as image_url
+                            url_img as image_url,
+                            stock
                         FROM products p
                         WHERE category_id = '$category_id'
                     ";
@@ -36,7 +37,8 @@ if ($res && $res->num_rows === 1) {
                         $producto['id'],
                         $producto['name'],
                         $producto['price'],
-                        $producto['image_url']
+                        $producto['image_url'],
+                        $producto['stock']
                     );
 
                 endforeach;

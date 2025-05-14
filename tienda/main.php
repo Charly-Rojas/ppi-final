@@ -13,7 +13,8 @@
                             id,
                             name,
                             price,
-                            url_img as image_url
+                            url_img as image_url,
+                            stock
                         FROM products p
                         ORDER BY RAND()
                         LIMIT 5
@@ -24,7 +25,8 @@
                         $producto['id'],
                         $producto['name'],
                         $producto['price'],
-                        $producto['image_url']
+                        $producto['image_url'],
+                        $producto['stock']
                     );
 
                 endforeach; ?>
@@ -50,7 +52,9 @@
                             id,
                             name,
                             price,
-                            url_img as image_url
+                            url_img as image_url,
+                            stock
+
                         FROM products p
                         ORDER BY created_at DESC
                         LIMIT 5
@@ -61,7 +65,8 @@
                         $producto['id'],
                         $producto['name'],
                         $producto['price'],
-                        $producto['image_url']
+                        $producto['image_url'],
+                        $producto['stock']
                     );
                 ?>
                 <?php endforeach; ?>
@@ -99,6 +104,7 @@ foreach ($categorias as $categoria):
                             id,
                             name,
                             price,
+                            stock,
                             url_img as image_url
                             FROM products p
                             WHERE category_id = " . $categoria['id'] . "
@@ -118,7 +124,8 @@ foreach ($categorias as $categoria):
                             $producto['id'],
                             $producto['name'],
                             $producto['price'],
-                            $producto['image_url']
+                            $producto['image_url'],
+                            $producto['stock']
                         );
                     endforeach; ?>
                     <div class="col mb-4 product-image">

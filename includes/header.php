@@ -97,11 +97,22 @@ require_once ROOT_DIR . '/conexion.php';
                     <?php
                     }
                     ?>
-                    <li>
+                    <?php
+                    if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == 1) {
+                    ?>
+                        <li class="pe-1">
+                            <a href="<?php echo ROOT_URL ?>/dashboard" class="border-0 btn btn-light rounded-circle" data-bs-toggle="tooltip" title="Botón especial">
+                                <i class="fa-solid fa-gauge"></i>
+                            </a>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                    <!-- <li>
                         <a href="#" class="search-item border-0 btn btn-light rounded-circle" data-bs-toggle="collapse" data-bs-target="#search-box" aria-label="Toggle navigation">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>

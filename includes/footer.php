@@ -9,7 +9,7 @@
                             <a href="#">Inicio</a>
                         </li>
                         <li class="pb-2">
-                            <a href="index.html">Términos y condiciones</a>
+                            <a href="<?php echo ROOT_URL?>/tyc">Términos y condiciones</a>
                         </li>
                     </ul>
                 </div>
